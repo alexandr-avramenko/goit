@@ -1,10 +1,17 @@
 public class Node<T> {
-    public Node<T> getCurrent() {
-        return current;
+    private T value;
+    private Node<T> next;
+
+    public Node( T value, Node<T> next) {
+        this.value = value;
+        this.next = next;
+    }
+    public T getValue() {
+        return value;
     }
 
-    public void setCurrent(Node<T> current) {
-        this.current = current;
+    public void setValue(T value) {
+        this.value = value;
     }
 
     public Node<T> getNext() {
@@ -15,21 +22,5 @@ public class Node<T> {
         this.next = next;
     }
 
-    public Node<T> getPrev() {
-        return prev;
-    }
 
-    public void setPrev(Node<T> prev) {
-        this.prev = prev;
-    }
-
-    private Node<T> current;
-    private Node<T> next;
-    private Node<T> prev;
-
-    public Node(Node<T> prev, Node<T> current, Node<T> next) {
-        this.current = current;
-        this.next = next;
-        this.prev = prev;
-    }
 }
