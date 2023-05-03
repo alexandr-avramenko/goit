@@ -1,27 +1,31 @@
 import java.util.Arrays;
 
-public class MyQueue {
-    private Object[] array = new Object[]{};
+public class MyQueue<E> {
+    private Object[] array = new Object[10];
+    private float capacityThreshold = array.length * 0.75f;
+    int elementCount = 0;
 
-    public void add(Object value) {
-        if (this.array.length == 0) {
-            array = new Object[]{value};
-        } else {
-            this.array = Arrays.copyOf(this.array, this.array.length + 1);
-            this.array[this.array.length - 1] = value;
+    public void add(E value) {
+
+        if (elementCount > capacityThreshold) {
+            this.array = Arrays.copyOf(this.array, this.array.length * 2);
+            this.capacityThreshold *= 2;
         }
+
+        this.array[elementCount] = value;
+        elementCount++;
     }
 
     public void clear() {
-        this.array = new Object[]{};
+        this.array = new Object[10];
     }
 
     public int size() {
-        return this.array.length;
+        return this.elementCount;
     }
 
     public Object peek() {
-        if (this.array.length > 0) {
+        if (this.elementCount > 0) {
             return this.array[0];
         } else {
             return this.array;
@@ -30,23 +34,26 @@ public class MyQueue {
 
     public Object poll() {
 
-        if (this.array.length == 0) {
+        if (this.array.length == 0 || this.elementCount == 0) {
             return this.array;
         }
 
-        Object toRemove = this.array[0];
+        Object elementToRemove = this.array[0];
 
-        Object[] temp = this.array;
-        this.clear();
-
-        for (int i = 1; i < temp.length; i++) {
-            add(temp[i]);
+        if (this.elementCount == 1) {
+            this.clear();
+            elementCount--;
+            return elementToRemove;
         }
-        return toRemove;
+
+        System.arraycopy(this.array, 1, this.array, 0, this.array.length - 1);
+        elementCount--;
+
+        return elementToRemove;
     }
 
     @Override
     public String toString() {
-        return Arrays.toString(array);
+        return Arrays.toString(this.array);
     }
 }

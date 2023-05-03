@@ -5,9 +5,6 @@ public class MyHashMap<K, V> {
     Node<K, V>[] entries = new Node[1];
     private int size = 0;
     private float capacityThreshold = entries.length * 0.75f;
-    public int getLength() {
-        return entries.length;
-    }
     public void clear() {
         Arrays.fill(entries, null);
     }
@@ -56,7 +53,7 @@ public class MyHashMap<K, V> {
         size++;
     }
 
-    public int getSize() {
+    public int size() {
         return size;
     }
 
