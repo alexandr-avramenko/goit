@@ -1,0 +1,11 @@
+name age
+alice 21
+ryan 30
+alex 31
+dima 37
+tate 30
+igor 53
+olya 31
+vladyslav 90
+steave 230
+john 60
